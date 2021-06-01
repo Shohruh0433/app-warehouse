@@ -17,6 +17,7 @@ public class Input {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     private Timestamp date;
 
     @ManyToOne(optional = false)
