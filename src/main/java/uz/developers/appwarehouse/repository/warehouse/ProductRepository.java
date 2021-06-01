@@ -1,7 +1,11 @@
 package uz.developers.appwarehouse.repository.warehouse;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import uz.developers.appwarehouse.entity.warehouseEntity.Product;
 
 public interface ProductRepository extends JpaRepository<Product,Long> {
+
+    Page<Product> findAllByCategoryIdAndActive(Long category_id, Pageable pageable);
 }
