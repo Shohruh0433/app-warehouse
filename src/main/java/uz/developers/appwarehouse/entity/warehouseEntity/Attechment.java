@@ -18,7 +18,7 @@ public class Attechment {
 
     private String  contentType;
 
-    private Double size;
+    private Long size;
 
 
 }
