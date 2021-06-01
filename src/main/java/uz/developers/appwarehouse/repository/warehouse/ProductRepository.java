@@ -7,5 +7,5 @@ import uz.developers.appwarehouse.entity.warehouseEntity.Product;
 
 public interface ProductRepository extends JpaRepository<Product,Long> {
 
-    Page<Product> findAllByCategoryIdAndActive(Long category_id, Pageable pageable);
+    Page<Product> findAllByCategoryIdAndActiveIsTrue(Long category_id,  Pageable pageable);
 }

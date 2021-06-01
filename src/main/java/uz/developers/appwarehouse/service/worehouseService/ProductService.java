@@ -45,7 +45,9 @@ public class ProductService {
     @Autowired
     Result result;
     public Result  add(ProductDto productDto){
-        Optional<Category> optionalCategory = categoryRepository.findById(productDto.getCategory_id());
+        Long cat_id=productDto.getCategory_id().longValue();
+
+        Optional<Category> optionalCategory = categoryRepository.findById(cat_id);
         if (!optionalCategory.isPresent()){
             result.setMessage("category not found");
             result.setSuccess(false);
@@ -54,14 +56,14 @@ public class ProductService {
 
         List<Long> longList = new ArrayList<>();
 
-        List<Integer> it = productDto.getAttachment_id();
+        List<Integer> it = productDto.getAttechment_id();
         for (Integer integer : it) {
             longList.add(Integer.toUnsignedLong(integer));
         }
 
 
         List<Attechment> attechments = attechmentRepository.findAllById(longList);
-        Optional<Measurement> optionalMeasurement = measurementRepository.findById(productDto.getMeasurement_id());
+        Optional<Measurement> optionalMeasurement = measurementRepository.findById(productDto.getMeasurement_id().longValue());
         if (!optionalMeasurement.isPresent()){
             result.setMessage("measurement not found");
             result.setSuccess(false);
@@ -83,7 +85,9 @@ public class ProductService {
     }
 
     public Result edit(Long id, ProductDto productDto){
-        Optional<Product> optionalProduct = productRepository.findById(id);
+
+        Long id1=id.longValue();
+        Optional<Product> optionalProduct = productRepository.findById(id1);
 
         if (!optionalProduct.isPresent()){
             result.setMessage("product not found");
@@ -96,7 +100,9 @@ public class ProductService {
             result.setSuccess(false);
             return result;
         }
-        Optional<Category> optionalCategory = categoryRepository.findById(productDto.getCategory_id());
+        Long cat_id=productDto.getCategory_id().longValue();
+
+        Optional<Category> optionalCategory = categoryRepository.findById(cat_id);
         if (!optionalCategory.isPresent()){
             result.setMessage("category not found");
             result.setSuccess(false);
@@ -104,14 +110,14 @@ public class ProductService {
         }
         List<Long> longList = new ArrayList<>();
 
-        List<Integer> it = productDto.getAttachment_id();
+        List<Integer> it = productDto.getAttechment_id();
         for (Integer integer : it) {
             longList.add(Integer.toUnsignedLong(integer));
         }
 
 
         List<Attechment> attechments = attechmentRepository.findAllById(longList);
-        Optional<Measurement> optionalMeasurement = measurementRepository.findById(productDto.getMeasurement_id());
+        Optional<Measurement> optionalMeasurement = measurementRepository.findById(productDto.getMeasurement_id().longValue());
         if (!optionalMeasurement.isPresent()){
             result.setMessage("measurement not found");
             result.setSuccess(false);
@@ -176,18 +182,14 @@ public class ProductService {
 
     public Page<Product> getByCategoryId(Long id, int page){
                 Pageable pageable= PageRequest.of(page,10);
-        return productRepository.findAllByCategoryIdAndActive(id, pageable);
+        return productRepository.findAllByCategoryIdAndActiveIsTrue(id, pageable);
 
     }
 
-    public Product geyById(long id){
+    public Product getById(Long id){
         Optional<Product> optionalProduct = productRepository.findById(id);
-        if (!optionalProduct.isPresent()){
-                        return null;
+        return optionalProduct.orElse(null);
 
-        }
-
-        return optionalProduct.get();
     }
 
 

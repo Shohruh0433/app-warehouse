@@ -5,31 +5,32 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import uz.developers.appwarehouse.dto.ProductDto;
+
 import uz.developers.appwarehouse.entity.warehouseEntity.Product;
 import uz.developers.appwarehouse.results.Result;
 import uz.developers.appwarehouse.service.worehouseService.ProductService;
 
-import javax.persistence.GeneratedValue;
+
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/products")
 public class ProductController {
 
     @Autowired
     ProductService productService;
 
     @PostMapping
-    public Result add(ProductDto productDto){
+    public Result add(@RequestBody ProductDto productDto){
         return productService.add(productDto);
     }
 
     @PutMapping("/{id}")
-    public  Result edit(@PathVariable Long id, ProductDto productDto)
+    public  Result edit(@PathVariable Long id,@RequestBody ProductDto productDto)
     {
         return productService.edit(id, productDto);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/active/{id}")
     public Result active(@PathVariable Long id){
         return productService.active(id);
     }
@@ -37,13 +38,13 @@ public class ProductController {
     public Result delete(@PathVariable Long id){
         return productService.noActive(id);
     }
-    @GetMapping("/{category_id}")
+    @GetMapping("/byCategoryId/{category_id}")
     public Page<Product> getAllByCategoryId(@RequestParam int page,@PathVariable Long category_id){
         return productService.getByCategoryId(category_id,page);
     }
     @GetMapping("/{id}")
     public Product getById(@PathVariable Long id){
-        return productService.geyById(id) ;
+        return productService.getById( id) ;
     }
 
 }

@@ -8,8 +8,8 @@ import java.util.List;
 public class ProductDto {
 
     private String name;
-    private Long category_id;
-    private List<Integer> attachment_id;
+    private Integer category_id;
+    private List<Integer> attechment_id;
     private Long measurement_id;
 
 }
