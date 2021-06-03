@@ -47,6 +47,14 @@ public class ProductService {
     public Result  add(ProductDto productDto){
         Long cat_id=productDto.getCategory_id().longValue();
 
+        boolean b = productRepository.existsByNameAndCategoryId(productDto.getName(), cat_id);
+        if (b){
+            result.setMessage("Sorry.This product has ben saved");
+            result.setSuccess(false);
+            return result;
+        }
+
+
         Optional<Category> optionalCategory = categoryRepository.findById(cat_id);
         if (!optionalCategory.isPresent()){
             result.setMessage("category not found");

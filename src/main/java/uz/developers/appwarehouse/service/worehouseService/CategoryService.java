@@ -21,6 +21,15 @@ public class CategoryService {
     public Result add(CategoryDto categoryDto){
         if (categoryDto.getCategory_id()==null){
 
+
+            boolean byName = categoryRepository.existsByName(categoryDto.getName());
+            if (byName){
+                result.setSuccess(false);
+
+                result.setMessage("Sorry this present category has ben saved");
+                return result;
+            }
+
             Category category=new Category();
             category.setActive(true);
             category.setName(categoryDto.getName());
@@ -31,6 +40,15 @@ public class CategoryService {
             result.setMessage("successfully saved present category");
             return result;
         }
+
+        boolean byName = categoryRepository.existsByNameAndCategoryId(categoryDto.getName(), categoryDto.getCategory_id());
+        if (byName){
+            result.setSuccess(false);
+
+            result.setMessage("Sorry this category has ben saved");
+            return result;
+        }
+
         Optional<Category> presentCategory = categoryRepository.findById(categoryDto.getCategory_id());
 
 

@@ -12,9 +12,13 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
+@Table(
+        uniqueConstraints=
+        @UniqueConstraint(columnNames={"name", "category_id"}))
 public class Product extends AbsClass {
 
     @ManyToOne (optional = false)
+    @JoinColumn(name = "category_id")
     private  Category category;
 
     @OneToMany
