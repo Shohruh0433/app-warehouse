@@ -19,38 +19,43 @@ public class ClientController {
     @Autowired
     ClientService clientService;
 
+
+    //client add
     @PostMapping
-    public Result add(@RequestBody ClientDto clientDto){
+    public Result add(@RequestBody ClientDto clientDto) {
         return clientService.add(clientDto);
 
     }
 
+    //client no active
     @DeleteMapping("/{id}")
-    public Result noActive(@PathVariable Long id){
+    public Result noActive(@PathVariable Long id) {
         return clientService.delete(id);
     }
 
+    //client active
     @PostMapping("/active/{id}")
-    public Result active(@PathVariable Long id){
+    public Result active(@PathVariable Long id) {
         return clientService.active(id);
     }
 
+    //id orqali edit
     @PutMapping("/{id}")
-    public Result edit(@PathVariable Long id,@RequestBody ClientDto clientDto){
-        return clientService.edit(id,clientDto);
+    public Result edit(@PathVariable Long id, @RequestBody ClientDto clientDto) {
+        return clientService.edit(id, clientDto);
     }
+
+    //id orqali clientni olsih
     @GetMapping("/{id}")
-    public Client getbyId(@PathVariable Long id){
+    public Client getbyId(@PathVariable Long id) {
         return clientService.getById(id);
     }
 
+    //barcha clientlar
     @GetMapping("/all")
-    public Page<Client> getAll(@RequestParam int page){
+    public Page<Client> getAll(@RequestParam int page) {
         return clientService.getAll(page);
     }
-
-
-
 
 
 }

@@ -17,13 +17,13 @@ public class AttechmentController {
     AttachmentService attachmentService;
 
     @PostMapping
-    public Result add(MultipartHttpServletRequest request){
+    public Result add(MultipartHttpServletRequest request) {
         return attachmentService.add(request);
     }
 
     @GetMapping("/{id}")
-    public void getBYId(@PathVariable Long id, HttpServletResponse response){
-        attachmentService.getById(id,response);
+    public void getBYId(@PathVariable Long id, HttpServletResponse response) {
+        attachmentService.getById(id, response);
     }
 
 }

@@ -21,34 +21,34 @@ public class CurrencyController {
     CurrencyService currencyService;
 
     @PostMapping
-    public Result add(@RequestBody CurrencyDto currencyDto){
+    public Result add(@RequestBody CurrencyDto currencyDto) {
         return currencyService.add(currencyDto);
     }
 
     @DeleteMapping("/{id}")
-    public Result noActive(@PathVariable Long id){
+    public Result noActive(@PathVariable Long id) {
         return currencyService.delete(id);
     }
 
     @PostMapping("/active/{id}")
-    public Result active(@PathVariable Long id){
+    public Result active(@PathVariable Long id) {
         return currencyService.active(id);
     }
 
     @PutMapping("/{id}")
-    public Result edit(@PathVariable Long id,@RequestBody CurrencyDto currencyDto){
-        return currencyService.edit(id,currencyDto);
+    public Result edit(@PathVariable Long id, @RequestBody CurrencyDto currencyDto) {
+        return currencyService.edit(id, currencyDto);
     }
+
     @GetMapping("/{id}")
-    public Currency getbyId(@PathVariable Long id){
+    public Currency getbyId(@PathVariable Long id) {
         return currencyService.getById(id);
     }
 
     @GetMapping("/all")
-    public Page<Currency> getAll(@RequestParam int page){
+    public Page<Currency> getAll(@RequestParam int page) {
         return currencyService.getAll(page);
     }
-
 
 
 }

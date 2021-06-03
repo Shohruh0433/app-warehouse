@@ -17,27 +17,32 @@ public class CategoryController {
     CategoryService categoryService;
 
     @PostMapping
-    public Result add(@RequestBody CategoryDto categoryDto){
+    public Result add(@RequestBody CategoryDto categoryDto) {
         return categoryService.add(categoryDto);
     }
 
+    //categoryni no active qilish
     @DeleteMapping("/{id}")
-    public Result delete(@PathVariable Long id){
+    public Result delete(@PathVariable Long id) {
         return categoryService.delete(id);
     }
 
+    //shu present categoryga tegishli child categorylar
     @GetMapping("/byCategoryId/{id}")
-    public List<Category> getByCatId(@PathVariable Long id){
+    public List<Category> getByCatId(@PathVariable Long id) {
         return categoryService.getByPresentId(id);
     }
 
+
+    //category ni aktiv qilish
     @PostMapping("/active/{id}")
-        public  Result active(@PathVariable Long id){
+    public Result active(@PathVariable Long id) {
         return categoryService.active(id);
     }
 
+    //categoryni id orqali edit
     @PutMapping("/edit/{id}")
-    public Result edit(@RequestBody CategoryDto categoryDto,@PathVariable Long id){
-        return categoryService.edit(categoryDto,id);
+    public Result edit(@RequestBody CategoryDto categoryDto, @PathVariable Long id) {
+        return categoryService.edit(categoryDto, id);
     }
 }

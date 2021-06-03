@@ -140,6 +140,7 @@ public class OutputService {
     public Output getByFacturaNomer(String factureNomer){
         return outputRepository.findByFactureNumber(factureNomer);
     }
+
     public Page<Output> getByDate(Timestamp date, int page){
         Pageable pageable= PageRequest.of(page,10);
         return outputRepository.findAllByDate(date,pageable);

@@ -19,29 +19,34 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
+    //product qo'shish
     @PostMapping
     public Result add(@RequestBody ProductDto productDto){
         return productService.add(productDto);
     }
-
+    //shu id li productni o'zgartirish
     @PutMapping("/{id}")
     public  Result edit(@PathVariable Long id,@RequestBody ProductDto productDto)
     {
         return productService.edit(id, productDto);
     }
-
+    //product ni activ qilish
     @PutMapping("/active/{id}")
     public Result active(@PathVariable Long id){
         return productService.active(id);
     }
+   //productni no active qilish
     @DeleteMapping("/{id}")
     public Result delete(@PathVariable Long id){
         return productService.noActive(id);
     }
+
+    //shu categoriyaga tegishli barcha productlar
     @GetMapping("/byCategoryId/{category_id}")
     public Page<Product> getAllByCategoryId(@RequestParam int page,@PathVariable Long category_id){
         return productService.getByCategoryId(category_id,page);
     }
+    //shu id ga tegishli product
     @GetMapping("/{id}")
     public Product getById(@PathVariable Long id){
         return productService.getById( id) ;

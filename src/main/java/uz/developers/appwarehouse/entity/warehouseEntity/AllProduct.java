@@ -12,23 +12,16 @@ import java.util.Date;
 @AllArgsConstructor
 @Data
 @Entity
-public class Input_Product {
 
+public class AllProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Double amount;
+    private Date expire_date;
+    private boolean active;
 
     @ManyToOne
     private Product product;
-
-    @Column(nullable = false)
-    private Double amount;
-
-    private Double price;
-
-    private Date expireDate;
-
-    @ManyToOne
-    private Input input;
 
 }

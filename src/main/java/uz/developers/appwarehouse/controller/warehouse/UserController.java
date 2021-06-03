@@ -20,36 +20,43 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    //ishchi qo'shish
     @PostMapping
     public Result add(@RequestBody UserDto userDto){
 
         return userService.add(userDto);
     }
-
+    //shu idli ishchini no active qilish
     @DeleteMapping("/{id}")
     public Result noActive(@PathVariable Long id){
         return userService.delete(id);
     }
 
+    //shu id li ishchini active qilish
     @PostMapping("/active/{id}")
     public Result active(@PathVariable Long id){
         return userService.active(id);
     }
 
+    //shu idli ishchini o'zgartuirish
     @PutMapping("/{id}")
     public Result edit(@PathVariable Long id,@RequestBody UserDto userDto){
         return userService.edit(userDto,id);
     }
+
+    //shu id li ishchi ma'lumotlari
     @GetMapping("/{id}")
     public User getbyId(@PathVariable Long id){
         return userService.getById(id);
     }
 
+    //barcha ishchilar
     @GetMapping("/all")
     public Page<User> getAll(@RequestParam int page){
         return userService.getAll(page);
     }
 
+    //omborxonaga tegishli bo'lgan ishchilar
     @GetMapping("/byWarehouseId/{id}")
     public Page<User> getByWarehouse_id(@PathVariable Long id,@RequestParam int page){
         return userService.getByWarehouseId(page, id);
